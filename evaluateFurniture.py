@@ -14,14 +14,14 @@ import warnings
 
 
 # ------------------------------------------- args ------------------------------------------- #
-mode = 'RNN'  # 'LSTM'
+mode = 'LSTM'  # 'RNN'
 vidPath = '/Users/jackshi/furniture_assembly/assembly/dataset/camera_data/camera_0_50_224_224_20_D210117_160343'
-trialName = 'trial_D210118_170948'
+trialName = 'trial_D210122_013514'
 
 predFileName = 'ES_out_{}_{}.txt'.format(mode, trialName[6:])
 gtFileName = 'labels.npy'
-errorPlotName = 'error.png'
-segmentsPlotName = 'segments.png'
+errorPlotName = 'error_{}.png'.format(mode)
+segmentsPlotName = 'segments_{}.png'.format(mode)
 seqs = [50]  # 50, 32, 35, 34, 33, 20, 18, 27, 9, 11
 
 relativeExtremaOrder = 20
@@ -116,7 +116,7 @@ for predFile, gtFile in files:
     plt.xlabel("Frames", fontsize=20)
     plt.ylabel("Prediction Error", fontsize=20)
     lgd = plt.legend()
-    plt.title("Sequence {} Self-Supervised Prediction Error".format(seq), fontsize=20)
+    plt.title("Sequence {} Self-Supervised Prediction Error ({})".format(seq, mode), fontsize=20)
     plt.tick_params(labelsize=15)
     plt.tight_layout()
     plt.savefig(join(vidPath, str(seq), errorPlotName))
@@ -125,7 +125,7 @@ for predFile, gtFile in files:
 
     # plot segments
     fig, (ax1, ax2) = plt.subplots(2)
-    fig.suptitle("Sequence {} Segments".format(seq), fontsize=20)
+    fig.suptitle("Sequence {} Segments ({})".format(seq, mode), fontsize=20)
     ax1.hlines(1, 0, len(x))
     ax1.eventplot(gtBoundaries, orientation='horizontal', colors='b')
     ax1.axis('off')
