@@ -1,0 +1,6 @@
+LSTM_seqs.txt
+RNN_seqs.txt
+vgg_16.ckpt
+models
+.idea
+.DS_Store
